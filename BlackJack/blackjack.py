@@ -35,7 +35,9 @@ def main():
 
     eval_env = Monitor(FlattenObservation(gym.make("Blackjack-v1")))
     mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=2000)
-    print(f"\nEval over 2000 episodes: mean_reward={mean_reward:.3f} +/- {std_reward:.3f}")
+    print(
+        f"\nEval over 2000 episodes: mean_reward={mean_reward:.3f} +/- {std_reward:.3f}"
+    )
 
     wins = losses = draws = 0
     for _ in range(2000):
@@ -52,7 +54,9 @@ def main():
         else:
             draws += 1
     total = wins + losses + draws
-    print(f"Win: {wins/total:.1%}  Loss: {losses/total:.1%}  Draw: {draws/total:.1%}")
+    print(
+        f"Win: {wins / total:.1%}  Loss: {losses / total:.1%}  Draw: {draws / total:.1%}"
+    )
 
     model.save("./ppo_blackjack")
     eval_env.close()

@@ -24,7 +24,9 @@ def epsilon_greedy(state, epsilon):
 
 
 for ep in range(episodes):
-    epsilon = max(epsilon_end, epsilon_start - (epsilon_start - epsilon_end) * (ep / episodes))
+    epsilon = max(
+        epsilon_end, epsilon_start - (epsilon_start - epsilon_end) * (ep / episodes)
+    )
 
     state, _ = env.reset()
     trajectory = []
@@ -78,7 +80,9 @@ for _ in range(eval_episodes):
 
 mean_reward = total_reward / eval_episodes
 print(f"\nEval over {eval_episodes} episodes: mean_reward={mean_reward:.4f}")
-print(f"Win: {wins/eval_episodes:.1%}  Loss: {losses/eval_episodes:.1%}  Draw: {draws/eval_episodes:.1%}")
+print(
+    f"Win: {wins / eval_episodes:.1%}  Loss: {losses / eval_episodes:.1%}  Draw: {draws / eval_episodes:.1%}"
+)
 
 env.close()
 
@@ -120,11 +124,23 @@ for player_sum in range(4, 22):
             )
             total_states += 1
             if learned_action != optimal_action:
-                mismatches.append((player_sum, dealer_card, usable_ace, learned_action, optimal_action))
+                mismatches.append(
+                    (
+                        player_sum,
+                        dealer_card,
+                        usable_ace,
+                        learned_action,
+                        optimal_action,
+                    )
+                )
 
 print(f"\nStates visited: {total_states}")
-print(f"Mismatches vs basic strategy: {len(mismatches)} ({len(mismatches)/total_states:.1%})")
+print(
+    f"Mismatches vs basic strategy: {len(mismatches)} ({len(mismatches) / total_states:.1%})"
+)
 for m in mismatches:
     learned_str = "HIT" if m[3] else "STICK"
     optimal_str = "HIT" if m[4] else "STICK"
-    print(f"  player={m[0]:>2} dealer={m[1]:>2} soft_ace={m[2]!s:>5}  learned={learned_str:>5}  optimal={optimal_str:>5}")
+    print(
+        f"  player={m[0]:>2} dealer={m[1]:>2} soft_ace={m[2]!s:>5}  learned={learned_str:>5}  optimal={optimal_str:>5}"
+    )
