@@ -25,7 +25,7 @@ def train_bench(algo_name, algo_class):
     policy_kwargs = dict(net_arch=custom_net_arch)
     
     
-    # Initialize Model
+    
     model = algo_class(
         "MlpPolicy", 
         env, 
@@ -50,7 +50,7 @@ def train_bench(algo_name, algo_class):
     }
     env.close()
 
-# 4. Execute Benchmark
+
 algos = {"PPO": PPO, "DQN": DQN, "A2C": A2C}
 for name, cls in algos.items():
     train_bench(name, cls)
